@@ -149,7 +149,7 @@ async function nomearUsuario_E_listarPacientes(){
     editarColunaNome(idUsuario);
 
     const vetorPacientesDoUsuario = await listarPacientesDoUsuario(idUsuario);
-
+    document.getElementById('tbody').innerHTML = "";
     vetorPacientesDoUsuario.forEach(elemento => {
         imprimirPaciente(elemento);
     })
