@@ -1,3 +1,5 @@
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+
 //Esconde os campos da primeira parte do formulário de cadastro do usuário e apresenta os campos da segunda parte
 function parte2(){
     
@@ -21,7 +23,7 @@ function parte2(){
 
 const cadastrarUsuario = async (usuario) => {
     try{    
-        await fetch('http://localhost:3000/usuarios', {
+        await fetch(apiURL+'usuarios', {
             method: "POST",
             headers:  {
                 'Accept': 'application/json, text/plain, */*',
