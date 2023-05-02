@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <title>Prontuário paciente Wexer</title>
+    <!--Bootstrap v5.3-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body onload="nomeiaUsario_editaLink_apresentaProntuario()">
+    <!-- <div class="navegador"></div> -->
+    <header class="d-flex justify-content-between" >
+        <div class="d-flex align-items-center">
+            <div class="logoTopo d-flex justify-content-center align-items-center">
+                <img src="imagens/logoCabecalho.png" alt="Logo Cabeçalho">
+            </div>
+            <a id="voltarPgPacientes" href="pacientes.html" class="voltarListagem ms-4">Voltar para listagem</a>
+        </div>
+        <div class="bemVindo d-flex align-items-center">
+            Bem vindo(a), <span id="nomeUsuario" class="ps-2">Nome Usuário</span>
+        </div>
+    </header>
+    <main>
+        <div class="central mx-auto" >
+
+            <div class="space_between2" >
+                
+                <div class="tituloProntuario d-flex align-items-center">
+                    Prontuário
+                </div>
+                
+                <!-- início Área pesquisar-->
+                <form id="formPesquisarNoProntuario">
+                    <div class="input-group ">
+                        <input id="campoPesquisar" type="search" class="form-control campo_pesquisar" placeholder="Pesquisar" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button id="botaoPesquisar" class="btn btn-outline-secondary botao_filtrar" type="submit"><img src="imagens/lupaCerta.png"><div>Filtrar</div></button>
+                        <!-- <input type="search" class="form-control  campo_pesquisar " placeholder="Pesquisar" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary botao_filtrar" type="button"  id="button-addon2"><img src="imagens/lupaCerta.png"><div>Filtrar</div></button> -->
+                    </div>
+                </form>
+                <!--Fim Área pesquisar-->
+            </div>
+
+            
+            <div>
+                <div class="container-fluid">
+                    <!--Área total do Prontuário-->
+                    <div class=" row " id="cabecalhoProntuario1">
+                        <!--Parte esquerda-->
+                        <div class="col-12 col-sm-4 ">
+                            <div class="caixaIdentificacaoPaciente">
+                                <div class="row">
+                                    <div class="col tituloIdentificacaoPaciente">Identificação do paciente</div>
+                                </div>
+                                <div class="row margInferiorDadosPaciente">
+                                    <div class="col-1">
+                                        <img src="imagens/logoPaciente.png" alt="Logo Paciente">
+                                    </div>
+                                    <div class="col">
+                                        <div class="col-12 tituloVerdeDadosPaciente">
+                                            Paciente
+                                        </div>
+                                        <div id="nomePaciente" class="col-12 cinzaDadosPaciente">
+                                            Ana Ester Resende
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row margInferiorDadosPaciente">
+                                    <div class="col-1">
+                                        <img src="imagens/logoData.png" alt="Logo Data">
+                                    </div>
+                                    <div class="col">
+                                        <div class="col-12 tituloVerdeDadosPaciente">
+                                            Nascimento
+                                        </div>
+                                        <div id="dataNascimentoPaciente" class="col-12 cinzaDadosPaciente">
+                                            10/09/2000
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="col-12 tituloVerdeDadosPaciente">
+                                            Idade
+                                        </div>
+                                        <div id="idadePaciente" class="col-12 cinzaDadosPaciente">
+                                            23 anos
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margInferiorDadosPaciente">
+                                    <div class="col-1">
+                                        <img src="imagens/logoProfissao.png" alt="Logo Profissão">
+                                    </div>
+                                    <div class="col">
+                                        <div class="col-12 tituloVerdeDadosPaciente">
+                                            Profissão
+                                        </div>
+                                        <div id="profissaoPaciente" class="col-12 cinzaDadosPaciente">
+                                            Designer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row margInferiorDadosPaciente">
+                                    <div class="col-1">
+                                        <img src="imagens/logoEscolariade.png" alt="Logo Escolaridade">
+                                    </div>
+                                    <div class="col">
+                                        <div class="col-12 tituloVerdeDadosPaciente">
+                                            Escolaridade
+                                        </div>
+                                        <div id="escolaridadePaciente" class="col-12 cinzaDadosPaciente">
+                                            Superior incompleto
+                                        </div>                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fim da parte esquerda-->
+
+                        <!--Início da parte Direita-->
+                        <div class="col-12 col-sm-8">
+                            <div class="row" >
+                                <div class="col-12 cabecalhoProntuario d-flex justify-content-around align-items-center">
+                                    <div class="titulosCabecalhoProntuario btn aumento" data-bs-toggle="modal" data-bs-target="#modalNovaSessao"><img src="imagens/rostoCabecalho.png">  Sessão</div>
+                                    <div class="titulosCabecalhoProntuario btn aumento" data-bs-toggle="modal" data-bs-target="#ModalCadastroFatoRelevante"><img src="imagens/fatoRelCabecalho.png">  Fato relevante</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-between align-items-center altura1">
+                                    <div class="traco"></div> 
+                                    
+                                    <div id="selectFiltro">
+                                        <select id="filtroSelect" class="form-select form-select-sm" style="width: 365px;">
+                                            <option selected>Filtrar por:</option>
+                                            <optgroup label="Ordem Inversa de Registro:">
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'todos_ordemInversaDeRegistro')" value="todos_ordemInversaDeRegistro">Todos (Ordem Inversa de Registro)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'sessao_ordemInversaDeRegistro')" value="sessao_ordemInversaDeRegistro">Sessão (Ordem Inversa de Registro)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'fatoRelevante_ordemInversaDeRegistro')" value="fatoRelevante_ordemInversaDeRegistro">Fato Relevante (Ordem Inversa de Registro)</option>
+                                            </optgroup>
+                                            <!-- <optgroup label="----------------------"></optgroup>                                            -->
+                                            <optgroup label="Ordem de Registro:">
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'todos_ordemDeRegistro')" value="todos_ordemDeRegistro">Todos (Ordem de Registro)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'sessao_ordemDeRegistro')" value="sessao_ordemDeRegistro">Sessão (Ordem de Registro)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'fatoRelevante_ordemDeRegistro')" value="fatoRelevante_ordemDeRegistro">Fato Relevante (Ordem de Registro)</option>
+                                            </optgroup>
+                                            
+                                            <optgroup label="Ordem Crescente de Data:">
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'todos_ordemCrescenteDeData')" value="todos_ordemCrescenteDeData">Todos (Ordem Crescente de Data)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'sessao_ordemCrescenteDeData')" value="sessao_ordemCrescenteDeData">Sessão (Ordem Crescente de Data)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'fatoRelevante_ordemCrescenteDeData')" value="fatoRelevante_ordemCrescenteDeData">Fato Relevante (Ordem Crescente de Data)</option>
+                                            </optgroup>
+                                            <optgroup label="Ordem Decrescente de Data:">
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'todos_ordemDecrescenteDeData')" value="todos_ordemDecrescenteDeData">Todos (Ordem Decrescente de Data)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'sessao_ordemDecrescenteDeData')" value="sessao_ordemDecrescenteDeData">Sessão (Ordem Decrescente de Data)</option>
+                                                <option onclick="imprimirFiltrosProntuario(idPaciente, 'fatoRelevante_ordemDecrescenteDeData')" value="fatoRelevante_ordemDecrescenteDeData">Fato Relevante (Ordem Decrescente de Data)</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Linha contéudo: Sesão ou Fato relevante-->
+                            <div id="conteudo" class="row">
+                                <div class="col-12 cartaoSessao">
+                                    <div class="circuloSessao"><img src="imagens/rostoCoracao.png"></div>
+                                    <div class="tituloCartao">Sessão 02</div>
+                                    <div class="dataCartao">22 de setembro de 2022</div>
+                                    <div class="conteudoCartao">A paciente relatou que estava tendo dificuldades com sua família e amigos próximos, pois demostra ansiedade diante de fatos cotidianos, resultando em reações de raiva com as pessoas que estão próximas a ela. Além disso, relatou brigas recentes com seus pais e namorado e, após a briga, ficou mal diante... <a href="sessao.html" class="linkAzul">Ver mais</a></div>
+                                    
+                                    <div class="btn-group tres_pontos">
+                                        <button type="button" class="btn"><img src="imagens/tresPontos.png"></button>
+                                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Três pontos</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item azul" href="#" data-bs-toggle="modal" data-bs-target="#modalEditarSessao"><img src="imagens/lapizAzul.png"> Editar</a></li>
+                                            <!-- <li><hr class="dropdown-divider"></li> -->
+                                            <li><a class="dropdown-item vermelho" href="#"><img src="imagens/lixoVermelho.png"> Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="tracoAzul"></div>
+
+                                <div class="col-12 cartaoFatoRelevante">
+                                    <div class="circuloFatoRelevante"><img src="imagens/logoFatoRelevanteCartao.png"></div>
+                                    <div class="tituloCartao">Fato relevante</div>
+                                    <div class="dataCartao">15 de setembro de 2022</div>
+                                    <div class="conteudoCartao">Cliente não compareceu</div>
+                                    
+                                    <div class="btn-group tres_pontos">
+                                        <button type="button" class="btn"><img src="imagens/tresPontos.png"></button>
+                                        <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Três pontos</span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item azul" href="#" data-bs-toggle="modal" data-bs-target="#ModalEditarFatoRelevante"><img src="imagens/lapizAzul.png"> Editar</a></li>
+                                            <!-- <li><hr class="dropdown-divider"></li> -->
+                                            <li><a class="dropdown-item vermelho" href="#"><img src="imagens/lixoVermelho.png"> Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fim da linha conteúdo: Sessão ou Fato Relevante-->
+                            <div class="row voltarParaTopo">
+                                <div class=" col-12  d-flex justify-content-center align-items-center">
+                                    <a href="#cabecalhoProntuario1" class="voltarParaTopo2">
+                                        <img class="me-2" src="imagens/setasParaCima.png">
+                                        Voltar para o topo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fim da parte direita-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- início dos Modais de Sessão e Fato Relevante-->
+
+        <!-- Modal Cadastro Sessão-->
+        <div class="modal fade" id="modalNovaSessao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--Modal centralizado e com barra de rolagem-->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content formPadding">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <h2 class="modal_titulo" >Nova Sessão</h2>
+                        
+                        <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        
+                    </div>
+                    <div class="modal-body semPadding">
+                        <form id="formCadastrarSessao" >
+                            <div class="container-fluid">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">1</div> Dados Gerais
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col ">
+                                        <label for="dataSessao" class="form-label mb-0">Data*</label>
+                                        <input type="date" class="form-control input" id="dataSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="horaInicioSessao" class="form-label mb-0">Hora de início*</label>
+                                        <input type="time" class="form-control input" id="horaInicioSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="horaFimSessao" class="form-label mb-0">Hora fim*</label>
+                                        <input type="time" class="form-control input" id="horaFimSessao">
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">2</div>Sessão
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="tituloSessao" class="form-label mb-0">Título*</label>
+                                        <input type="text" class="form-control input" id="tituloSessao" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="resumoSessao" class="form-label">Resumo da Sessão*</label>                                            
+                                        <textarea name="resumoSessao" class="form-control textarea1" id="resumoSessao"  rows="10" placeholder="Texto." ></textarea>
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">3</div>Pagamento
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="valorSessao" class="form-label">Valor</label>
+                                        <input type="number" class="form-control input" id="valorSessao" placeholder="R$ 150,99" >
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="formaPagamento" class="form-label">Forma de pagamento</label>
+                                        <select class="form-select input" id="formaPagamento">
+                                            <option value="PIX">PIX</option>
+                                            <option value="Cartao_Debito">Cartão de Débito</option>
+                                            <option value="Cartao_Credito">Cartao de Crédito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Status</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="estadoPagamento" id="pago" value="pago">
+                                            <label class="form-check-label" for="pago">
+                                                Pago
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="estadoPagamento" id="nao_pago" value="nao_pago">
+                                            <label class="form-check-label" for="nao_pago">
+                                                Não pago
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-1 d-flex justify-content-end align-items-center p-0">
+                                        <img src="imagens/pino.png" style="width:30px; height: 30px;" >
+                                    </div>
+                                    <div class="col-11 col-lg-7"><b>Dica: </b>Registrar os pagamentos das sessões irá te auxiliar na sua organização financeira.</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer semPadding">
+                        <div class="w-100 d-flex justify-content-between align-items-center flex-wrap mt-4">
+                            <div class="observacao">*Campos Obrigatórios</div>
+                            <div class=" d-flex justify-content-end flex-wrap">
+                                <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn botaoCriar" id="btn_cadastrar_sessao">Criar</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--Fim do Modal Cadastro Sessão-->
+
+        <!--Início Modal Cadastro Fato Relevante-->
+        <div class="modal fade" id="ModalCadastroFatoRelevante" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--Modal centralizado e com barra de rolagem-->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content formPadding">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <h2 class="modal_titulo" >Novo Fato Relevante</h2>
+                        <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                    </div>
+                    <div class="modal-body semPadding">
+                        <form id="formCadastrarFatoRelevante">
+                            <div class="container">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="dataFatoRelevante" class="form-label m-0">Data*</label>
+                                        <input type="date" class="form-control input" id="dataFatoRelevante">
+                                    </div>
+                                    <div class="col">
+                                        <label for="tituloFatoRelevante" class="form-label m-0">Título*</label>
+                                        <input type="text" class="form-control input" id="tituloFatoRelevante" placeholder="Digite">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="descricaoFR" class="form-label">Descrição*</label>
+                                        <textarea name="descricaoFR" id="descricaoFR" rows="10" class="textarea1" placeholder="Texto."></textarea>
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class=" d-flex justify-content-between align-items-center flex-wrap mt-4">
+                                    <div class="observacao">*Campos Obrigatórios</div>
+                                    <div class=" d-flex justify-content-end flex-wrap">
+                                        <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn botaoCriar">Criar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fim Modal Cadastro Fato relevante-->
+
+        <!--Início Modal Editar Sessão-->
+        <div class="modal fade" id="modalEditarSessao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--Modal centralizado e com barra de rolagem-->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content formPadding">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <h2 class="modal_titulo" >Editar Sessão</h2>
+                        
+                        <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        
+                    </div>
+                    <div class="modal-body semPadding">
+                        <form id="formEditarSessao" >
+                            <div class="container-fluid">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">1</div> Dados Gerais
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col ">
+                                        <label for="editarDataSessao" class="form-label mb-0">Data*</label>
+                                        <input type="date" class="form-control input" id="editarDataSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="editarHoraInicioSessao" class="form-label mb-0">Hora de início*</label>
+                                        <input type="time" class="form-control input" id="editarHoraInicioSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="editarHoraFimSessao" class="form-label mb-0">Hora fim*</label>
+                                        <input type="time" class="form-control input" id="editarHoraFimSessao">
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">2</div>Sessão
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="editarTituloSessao" class="form-label mb-0">Título*</label>
+                                        <input type="text" class="form-control input" id="editarTituloSessao" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="editarResumoSessao" class="form-label">Resumo da Sessão*</label>                                            
+                                        <textarea name="ditarResumoSessao" class="form-control textarea1" id="editarResumoSessao"  rows="10" placeholder="Texto." ></textarea>
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">3</div>Pagamento
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editarValorSessao" class="form-label">Valor</label>
+                                        <input type="number" class="form-control input" id="editarValorSessao" placeholder="R$ 150,99" >
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarFormaPagamento" class="form-label">Forma de pagamento</label>
+                                        <select class="form-select input" id="editarFormaPagamento">
+                                            <option value="PIX">PIX</option>
+                                            <option value="Cartao_Debito">Cartão de Débito</option>
+                                            <option value="Cartao_Credito">Cartao de Crédito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Status</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editarEstadoPagamento" id="editarPago" value="pago">
+                                            <label class="form-check-label" for="editarPago">
+                                                Pago
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editarEstadoPagamento" id="editarNao_pago" value="nao_pago">
+                                            <label class="form-check-label" for="editarNao_pago">
+                                                Não pago
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-1 d-flex justify-content-end align-items-center p-0">
+                                        <img src="imagens/pino.png" style="width:30px; height: 30px;" >
+                                    </div>
+                                    <div class="col-11 col-lg-7"><b>Dica: </b>Registrar os pagamentos das sessões irá te auxiliar na sua organização financeira.</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer semPadding">
+                        <div class="w-100 d-flex justify-content-between align-items-center flex-wrap mt-4">
+                            <div class="observacao">*Campos Obrigatórios</div>
+                            <div class=" d-flex justify-content-end flex-wrap">
+                                <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn botaoSalvarAlteracoes" id="btn_editarSessao">Salvar alterações</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--Fim do Modal Editar Sessão-->
+        
+        <!--Início Modal Editar Fato Relevante-->
+        <div class="modal fade" id="ModalEditarFatoRelevante" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--Modal centralizado e com barra de rolagem-->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content formPadding">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <h2 class="modal_titulo" >Editar Fato Relevante</h2>
+                        <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                    </div>
+                    <div class="modal-body semPadding">
+                        <form  id="formEditarFatoRelevante" >
+                            <div class="container">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="editarDataFatoRelevante" class="form-label m-0">Data*</label>
+                                        <input type="date" class="form-control input" id="editarDataFatoRelevante">
+                                    </div>
+                                    <div class="col">
+                                        <label for="editarTituloFatoRelevante" class="form-label m-0">Título*</label>
+                                        <input type="text" class="form-control input" id="editarTituloFatorelevante" placeholder="Digite">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editarDescricaoFR" class="form-label">Descrição*</label>
+                                        <textarea name="editarDescricaoFR" id="editarDescricaoFR" rows="10" class="textarea1" placeholder="Texto."></textarea>
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class=" d-flex justify-content-between align-items-center flex-wrap mt-4">
+                                    <div class="observacao">*Campos Obrigatórios</div>
+                                    <div class=" d-flex justify-content-end flex-wrap">
+                                        <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn botaoCriar">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fim Modal Editar Fato relevante-->
+    </main>
+    <!--Bootstrap v5.3-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="JavaScript/prontuario.js"></script>
+</body>
+</html>

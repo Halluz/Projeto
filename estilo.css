@@ -1,0 +1,871 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.navegador{
+    height: 38px;
+}
+body{
+    background-color: rgb(242, 242, 242);
+    background-image: url("imagens/logo1.png");
+    background-repeat:no-repeat;
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 80px;
+}
+
+.borda-r{
+    border: 2px solid red;
+}
+
+.borda-g{
+    border: 2px solid green;
+}
+
+.borda-b{
+    border: 2px solid blue;
+}
+
+/* Página Cadastro Usuário*/
+.formCadastro{
+    padding-top: 43px;
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-bottom: 40px;
+    max-width: 522px;
+    /* margin: 100px auto; */
+    margin: 20px auto;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+
+}
+
+.centralizarImgTexto{
+    text-align: center;
+}
+
+.centralizarImgTexto img{
+    display: block;
+}
+
+.centralizarImgTexto .s1{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #00995D;
+    display: block;
+    margin-top: 25px;
+}
+
+.centralizarImgTexto .s2{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* line-height: 22px; */
+    color: #00995D;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 26px;
+}
+
+.verde{
+    background: #00995D;
+}
+
+.botao{
+    background: #00995D;
+    color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    width: 192px;
+    height: 48px;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.botao:hover{
+    background-color: #05cc7c;
+}
+
+.ladoAlado{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+}
+
+.espaco1{
+    margin-top: 35px;
+}
+
+.label1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 0px;
+}
+
+.labelCorEscuro{
+    color: #4F4F4F;
+}
+
+.infoSenha{
+    /* margin-top: 18px; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(111, 111, 110, 1)
+}
+
+.infoSenha span{
+    /* font-size:16px; */
+    color:#EB5757;
+}
+
+.parte1{
+    display:block;
+}
+.parte2{
+    display: none;
+}
+/* Página Login*/
+.formLogin{
+    max-width: 608px;
+    min-height: 608px;
+    background-color: #017849;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding-top: 77px;
+    padding-left: 144px;
+    padding-right: 144px;
+    padding-bottom: 55px;
+    /* margin: 105px auto; */
+    /* margin: 25px auto; */
+    margin: 0px auto;
+}
+
+@media (max-width: 500px ) {
+    .formLogin{
+    max-width: 608px;
+    min-height: 608px;
+    background-color: #017849;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding-top: 77px;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-bottom: 55px;
+    /* margin: 105px auto; */
+    /* margin: 25px auto; */
+    margin: 0px auto;
+    }
+} 
+
+.espaco2{
+    margin-top: 64px;
+}
+.botaologin{
+    background: none;
+    border: 1px solid white;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.botaologin:hover{
+    background-color: #05cc7c;
+}
+
+.labelCorClaro{
+    color: white;
+}
+
+.textoLogin{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: white;
+    margin-top: 25px;
+}
+
+.textoLogin a{
+    color: white;
+    text-decoration: none;
+}
+
+.textoLogin a:hover{
+    text-decoration: underline;
+}
+
+.olhoPai{
+    position: relative;
+    width: 100%;
+}
+
+.olho{
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    cursor: pointer;
+    height: 30px;
+}
+
+/* Página Pacientes*/
+
+header{
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    padding-right: 20px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 3;
+    
+}
+
+header .logoTopo{
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.bemVindo{
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    color: #017849;
+
+}
+
+.bemVindo span{
+    font-weight: bold;
+}
+
+.central{
+    max-width: 1284px;
+}
+
+.tituloPacientes{
+    font-family: 'Comfortaa', cursive;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 27px;
+    height: 48px;
+    color: #4F4F4F;
+    margin: 8px 0px;
+}
+
+.containerPacientes{
+    background-color: white;
+    border-radius: 16px;
+    padding: 25px;
+
+}
+
+.botao_novo_cadastro{
+    background-color: #017849;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    border: none;
+    border-radius: 30px;
+    width:197px;
+    height:52px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.botao_novo_cadastro:hover{
+    background-color: #05cc7c;
+}
+
+.space_between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 47px;
+    flex-wrap: wrap;
+    
+}
+
+.space_between2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 13px;
+    flex-wrap: wrap;
+    margin-bottom: 33px;
+    margin-top: 33px;
+}
+
+.campo_pesquisar{
+    border: 1px solid #BDBDBD;
+    border-radius: 24px 0px 0px 24px;
+    max-width: 379px;
+    /* height: 48px; */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.campo_pesquisar::placeholder{
+    color: #828282;
+}
+
+.botao_filtrar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 10px;
+    background: #00995D;
+    border-radius: 0px 30px 30px 0px;
+    color: white;
+    font-weight: 700;
+}
+
+.botao_filtrar:hover{
+    background-color: #05cc7c;
+}
+
+.tabelaCabecalho{
+    color: #2F80ED;
+    font-weight: 400;
+}
+
+.th400{
+    font-weight: 400;
+}
+
+.largCodigo{
+    max-width: 100px;
+    /* background: yellow; */
+}
+
+.largAcoes{
+    max-width: 180px;
+    /* background: pink; */
+}
+
+.iconeOrdenacao{
+    cursor: pointer;
+    height: 25px;
+}
+
+
+
+.dadosPaciente:hover{
+    background-color:rgba(7, 218, 133,0.1);
+    cursor:pointer;
+    font-weight:700;
+}
+
+/* Estilização dos Modais página pacientes*/
+
+.modal_titulo{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #00995D;
+}
+
+h2 {
+    margin: 0px;
+}
+.observacao{
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0.2px;
+    color: #616161;
+}
+
+.input {
+    height: 48px;
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;  
+}
+
+
+
+.input::placeholder{
+    color: #828282;
+}
+
+.botaoCriar{
+    background: #00995D;
+    color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    width: 130px;
+    /* width: 147px; */
+    height: 48px;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.botaoCriar:hover{
+    background-color: #05cc7c;
+}
+
+.botaoCancelar{
+    /* width: 147px; */
+    width: 130px;
+    height: 48px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.botaoCancelar:hover{
+    border: 1px solid #BDBDBD;
+}
+
+.semborda{
+    border:none;
+    background-color: white;
+}
+
+.semBordaInferior{
+    border-bottom:none;
+}
+
+.semPadding{
+    padding: 0px;
+}
+
+.paddingForm{
+    padding: 24px 20px;
+}
+
+/* Modal formulário Editar Paciente*/
+
+.botaoSalvarAlteracoes{
+    background: #00995D;
+    color: white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    width: 218px;
+    height: 48px;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.mensagemAnimacao{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 128%;
+    text-align: center;
+    color: #00995D;
+    margin-bottom: 20px;
+    margin-top: 55px;
+}
+
+.botaoAnimacao{
+    background: #017849;
+    border-radius: 8px;
+    height: 48px;
+    width: 264px;   
+    color: white;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align:center;
+}
+
+.cardAnimacao{
+    padding: 36px 60px 40px 60px;
+}
+
+/* Página prontuário */
+
+.voltarListagem{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 138.5%;
+    color: #212121;
+    text-decoration:none;
+}
+
+.voltarListagem:hover{
+    text-decoration: underline;
+}
+
+.tituloProntuario{
+    font-family: 'Comfortaa', cursive;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 27px;
+    /* height: 48px; */
+    color: #4F4F4F;
+    margin: 8px 0px;
+}
+
+.caixaIdentificacaoPaciente{
+    background-color: white;
+    /* width: 340px;
+    height: 350px; */
+    border: 1px solid #E0E0E0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.tituloIdentificacaoPaciente{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #212121;
+    margin-bottom: 23px;
+}
+
+.tituloVerdeDadosPaciente{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 170%;
+    color: #00995D;
+}
+
+.cinzaDadosPaciente{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 170%;
+    color: #616161;
+}
+
+.margInferiorDadosPaciente{
+    margin-bottom: 14px;
+}
+
+.cabecalhoProntuario{
+    height: 80px;
+    background: white;
+    border: 1px solid #E0E0E0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.titulosCabecalhoProntuario{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #616161;
+}
+
+.altura1{
+    height: 80px;
+    color:#757575;
+}
+
+.traco{
+    background-color:#BDBDBD;
+    height: 1px;
+    width: 100%;
+}
+.cartaoSessao{
+    min-height: 210px;
+    background: white;
+    border: 1px solid #E0E0E0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 8px 8px 0px;
+    padding: 40px 20px 24px 24px;
+    position: relative;
+    border-left: 4px solid #00995D;
+}
+
+.circuloSessao{
+    width: 48px;
+    height: 48px;
+    background-color: #00995D;
+    border-radius: 50%;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;  
+    position: absolute;
+    left: 24px;
+    top: 0px;
+    transform: translate(0,-50%);
+}
+
+.tituloCartao{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color:black;
+    /* margin-bottom: px; */
+}
+
+.dataCartao{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #616161;
+    margin-bottom: 24px;
+}
+.conteudoCartao{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 170%;
+    color: #424242;
+}
+.azul{
+    color: rgba(47, 128, 237, 1);
+}
+
+.linkAzul{
+    color: rgba(47, 128, 237, 1);
+    text-decoration: none;
+}
+
+.linkAzul:hover{
+    text-decoration: underline;
+}
+
+.vermelho{
+    color: #EB5757;
+}
+
+.tres_pontos{
+    /* background-color:#00995c64; */
+    position: absolute;
+    right: 0px;
+    top: 0px;
+
+}
+
+.cartaoFatoRelevante{
+    min-height: 146px;
+    background-color: white;
+    border: 1px solid #E0E0E0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 8px 8px 0px;
+    border-left: 4px solid #2F80ED;
+    padding: 40px 20px 24px 24px;
+    position: relative;
+}
+
+.circuloFatoRelevante{
+    width: 48px;
+    height: 48px;
+    background-color:#2F80ED;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 24px;
+    top: 0px;
+    transform: translate(0,-50%);
+}
+
+.tracoAzul{
+    height: 49px;
+    border-left: 3px solid #2F80ED;
+    margin-left: 50px;
+    width: 1px;
+}
+
+.tracoVerde{
+    height: 49px;
+    border-left: 3px solid #00995D;
+    margin-left: 50px;
+    width: 1px;
+}
+
+.voltarParaTopo{
+    margin-top: 61px;
+    margin-bottom: 98px;
+}
+
+.voltarParaTopo2{
+    color: #212121;
+    text-decoration: none;
+}
+
+.voltarParaTopo2:hover{
+    text-decoration: underline;
+}
+/* Modal Formulario cadastrar Sessão*/
+
+.formPadding{
+    padding: 24px 32px;
+}
+
+.tituloSessao{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #212121;
+}
+
+.numeral{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #00995D;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.margemSupInf24px{
+    margin: 24px 0px;
+}
+
+.label2{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #4F4F4F;
+}
+
+.textarea1{
+    width: 100%;
+    border: 1px solid #BDBDBD; border-radius: 8px; 
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+.etiquetaInput{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    height: 48px
+}
+
+.etiquetaInput::placeholder{
+    color: #4F4F4F;
+}
+
+/* Modal Cadastrar Fato Relevante */
+
+/* Página Sessão.html*/
+.cabecalhoVoltar{
+    background-color: white;
+    margin-left: 80px;
+    height: 48px;
+    border-radius: 16px;
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding-left: 30px;
+}
+
+.sessaoContainer{
+    max-width: 924px;
+    
+}
+
+.corpoSessao{
+    background-color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+}
+
+.opcoes{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.tituloPaginaSessao{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 27px;
+    color: #4F4F4F;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.tituloCorpoSessao{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: black;
+}
+
+.tituloPagamento{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: black;
+}
+
+.labelSessao{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #757575;
+}
+
+.valorSessao{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.aumento{
+    transition: transform 0.2s ease-in-out;
+}
+
+.aumento:hover{
+    transform: scale(1.2);
+}

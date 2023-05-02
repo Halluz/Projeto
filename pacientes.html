@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <title>Pacientes Wexer</title>
+    <!--Bootstrap v5.3-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body onload="nomearUsuario_E_listarPacientes()">
+    <!-- <div class="navegador"></div> -->
+    <header class="d-flex justify-content-between">
+        <div class="logoTopo d-flex justify-content-center align-items-center">
+            <img src="imagens/logoCabecalho.png" alt="Logo Cabeçalho">
+        </div>
+        <div class="bemVindo d-flex align-items-center">
+            Bem vindo(a), <span id="nomeUsuario" class="ps-2">Nome Usuário</span>
+        </div>
+    </header>
+    <main>
+        <div class="central mx-auto">
+            <div class="tituloPacientes d-flex align-items-center">
+                Meus pacientes
+            </div>
+            <div class="containerPacientes">
+                <div class="space_between">
+                    <!-- Botão que dispara o modal do formulário Cadastro do Paciente-->
+                    <button type="button" class="botao_novo_cadastro"  data-bs-toggle="modal" data-bs-target="#modalCadastroPaciente">
+                        <img src="imagens/logoMais.png">
+                        Novo Cadastro
+                    </button>
+                    <form id="formPesquisar">
+                        <div class="input-group ">
+                            <input id="campoPesquisar" type="search" class="form-control campo_pesquisar" placeholder="Pesquisar nome" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button id="botaoPesquisar" class="btn btn-outline-secondary botao_filtrar" type="submit"><img src="imagens/lupaCerta.png"><div>Filtrar</div></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col class="largCodigo">
+                            <col>
+                            <col>
+                            <col class="largAcoes">
+                        </colgroup>
+                        <thead class="tabelaCabecalho">
+                            <tr>
+                                <th scope="col" class="th400 text-center">Código</th>
+                                <th id="colunaNome" scope="col" class="th400"><img src="imagens/iconeOrdemAlfabética.png" class="iconeOrdenacao me-2" onclick="ordemAlfabeticaPacientes(idUsuario)"  title="Ordem Alfabética">Nome<img src="imagens/iconOrdemInversaAlfabetica.png" class="iconeOrdenacao ms-2" onclick="ordemAlfabeticaInversaPacientes(idUsuario)" title="Ordem Alfabética Inversa"> </th>
+                                <th scope="col" class="th400">CPF</th>
+                                <th scope="col" class="th400 text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Modal cadastro de Paciente -->
+        <div class="modal fade" id="modalCadastroPaciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content paddingForm">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <div class="container d-flex justify-content-between align-items-center">
+                            <h2 class="modal_titulo" >Novo paciente</h2>
+                            <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body semPadding">
+                        
+                        <form id="formCadastroPaciente">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="CDF" class="form-label label1 labelCorEscuro">CPF*</label>
+                                        <input type="text" class="form-control input" id="CPF" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="nomePaciente" class="form-label label1 labelCorEscuro">Nome*</label>
+                                        <input type="text" class="form-control input" id="nomePaciente" placeholder="Digite">
+                                    </div>
+                                    <div class="col">
+                                        <label for="dataNascimento" class="form-label label1 labelCorEscuro">Data de nascimento*</label>
+                                        <input type="date" class="form-control input" id="dataNascimento" >
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="email" class="form-label label1 labelCorEscuro">E-mail*</label>
+                                        <input type="email" class="form-control input" id="email" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="genero" class="form-label label1 labelCorEscuro">Sexo/Gênero*</label>
+                                        <select class="form-select  input" id="genero">
+                                            <option selected>Digite</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Feminino">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="nacionalidade" class="form-label label1 labelCorEscuro">Nacionalidade*</label>
+                                        <input type="text" class="form-control input" id="nacionalidade" placeholder="Digite">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="naturalidade" class="form-label label1 labelCorEscuro">Naturalidade*</label>
+                                        <input type="text" class="form-control input" id="naturalidade" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="profissao" class="form-label label1 labelCorEscuro">Profissão*</label>
+                                        <input type="text" class="form-control input" id="profissao" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="escolaridade" class="form-label label1 labelCorEscuro">Escolaridade*</label>
+                                        <select class="form-select input" id="escolaridade">
+                                            <option selected>Digite</option>
+                                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                            <optioon value="Ensino Fundamental Completo">Ensino Fundamental Completo</optioon>
+                                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col-12 col-sm-4">
+                                        <label for="estadoCivil" class="form-label label1 labelCorEscuro">Estado Civil*</label>
+                                        <select class="form-select input" id="estadoCivil">
+                                            <option selected>Digite</option>
+                                            <option value="Solteiro">Solteiro(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Separado">Separado(a)</option>
+                                            <option value="Divorciado">Divorciado(a)</option>
+                                            <option value="Viuvo">Viúvo(a)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="mae" class="form-label label1 labelCorEscuro">Mãe*</label>
+                                        <input type="text" class="form-control input" id="mae" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="pai" class="form-label label1 labelCorEscuro">Pai*</label>
+                                        <input type="text" class="form-control input" id="pai" placeholder="Digite">
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class=" d-flex justify-content-between align-items-center flex-wrap">
+                                    <div class="observacao">*Campos Obrigatórios</div>
+                                    <div class=" d-flex justify-content-end flex-wrap">
+                                        <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn botaoCriar">Criar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar dados do Paciente -->
+        <div class="modal fade" id="modalEditarDadosPaciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content paddingForm">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <div class="container  d-flex justify-content-between align-items-center">
+                            <h2 class="modal_titulo">Editar dados do paciente</h2>
+                            <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body semPadding">
+                        
+                        <form id="formEditarDadosPaciente">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="editarCDF" class="form-label label1 labelCorEscuro">CPF*</label>
+                                        <input type="text" class="form-control input" id="editarCPF">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarNomePaciente" class="form-label label1 labelCorEscuro">Nome*</label>
+                                        <input type="text" class="form-control input" id="editarNomePaciente">
+                                    </div>
+                                    <div class="col">
+                                        <label for="editarDataNascimento" class="form-label label1 labelCorEscuro">Data de nascimento*</label>
+                                        <input type="date" class="form-control input" id="editarDataNascimento">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="editarEmail" class="form-label label1 labelCorEscuro">E-mail*</label>
+                                        <input type="email" class="form-control input" id="editarEmail">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarGenero" class="form-label label1 labelCorEscuro">Sexo/Gênero*</label>
+                                        <select class="form-select  input" id="editarGenero">
+                                            <option selected>Digite</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Feminino">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="editarNacionalidade" class="form-label label1 labelCorEscuro">Nacionalidade*</label>
+                                        <input type="text" class="form-control input" id="editarNacionalidade">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="editarNaturalidade" class="form-label label1 labelCorEscuro">Naturalidade*</label>
+                                        <input type="text" class="form-control input" id="editarNaturalidade">
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarProfissao" class="form-label label1 labelCorEscuro">Profissão*</label>
+                                        <input type="text" class="form-control input" id="editarProfissao">
+                                    </div>
+                                    <div class="col">
+                                        <label for="editarEscolaridade" class="form-label label1 labelCorEscuro">Escolaridade*</label>
+                                        <select class="form-select input" id="editarEscolaridade">
+                                            <option selected>Digite</option>
+                                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                            <optioon value="Ensino Fundamental Completo">Ensino Fundamental Completo</optioon>
+                                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <label for="editarEstadoCivil" class="form-label label1 labelCorEscuro">Estado Civil*</label>
+                                        <select class="form-select input" id="editarEstadoCivil">
+                                            <option selected>Digite</option>
+                                            <option value="Solteiro">Solteiro(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Separado">Separado(a)</option>
+                                            <option value="Divorciado">Divorciado(a)</option>
+                                            <option value="Viuvo">Viúvo(a)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarMae" class="form-label label1 labelCorEscuro">Mãe*</label>
+                                        <input type="text" class="form-control input" id="editarMae" >
+                                    </div>
+                                    <div class="col">
+                                        <label for="editarPai" class="form-label label1 labelCorEscuro">Pai*</label>
+                                        <input type="text" class="form-control input" id="editarPai">
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class=" d-flex justify-content-between align-items-center flex-wrap">
+                                    <div class="observacao">*Campos Obrigatórios</div>
+                                    <div class=" d-flex justify-content-end flex-wrap">
+                                        <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn botaoSalvarAlteracoes">Salvar alterações</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal formulário Deletar Paciente -->
+        <div class="modal fade" id="modalDeletarDadosPaciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content paddingForm">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <div class="container d-flex justify-content-between align-items-center">
+                            
+                            <div class="d-flex">
+                                <h2 class="modal_titulo ">Dados do paciente</h2>
+                                <!-- <a href="#"><img src="imagens/logoEditar.png" class="ms-2" data-bs-toggle="modal" data-bs-target="#modalEditarDadosPaciente"></a> -->
+                                <a href="#" class="linkEditarPaciente"><img src="imagens/logoEditar.png" class="ms-2" onclick="mostrarModalEditarPaciente(idPaciente)"></a>
+                            </div>
+                            <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body semPadding">
+                        
+                        <form id="formDeletarDadosPaciente">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="delCDF" class="form-label label1 labelCorEscuro">CPF</label>
+                                        <input type="text" class="form-control input" id="delCPF" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="delNomePaciente" class="form-label label1 labelCorEscuro">Nome</label>
+                                        <input type="text" class="form-control input" id="delNomePaciente" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="delDataNascimento" class="form-label label1 labelCorEscuro">Data de nascimento</label>
+                                        <input type="date" class="form-control input" id="delDataNascimento" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="delEmail" class="form-label label1 labelCorEscuro">E-mail</label>
+                                        <input type="email" class="form-control input" id="delEmail" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="delGenero" class="form-label label1 labelCorEscuro">Sexo/Gênero</label>
+                                        <select class="form-select  input" id="delGenero" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Feminino">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="delNacionalidade" class="form-label label1 labelCorEscuro">Nacionalidade</label>
+                                        <input type="text" class="form-control input" id="delNacionalidade" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="delNaturalidade" class="form-label label1 labelCorEscuro">Naturalidade</label>
+                                        <input type="text" class="form-control input" id="delNaturalidade" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="delProfissao" class="form-label label1 labelCorEscuro">Profissão</label>
+                                        <input type="text" class="form-control input" id="delProfissao" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="delEscolaridade" class="form-label label1 labelCorEscuro">Escolaridade</label>
+                                        <select class="form-select input" id="delEscolaridade" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                            <optioon value="Ensino Fundamental Completo">Ensino Fundamental Completo</optioon>
+                                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                            <option value="Ension Superior Completo">Ensino Superior Completo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <label for="delEstadoCivil" class="form-label label1 labelCorEscuro">Estado Civil</label>
+                                        <select class="form-select input" id="delEstadoCivil" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Solteiro">Solteiro(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Separado">Separado(a)</option>
+                                            <option value="Divorciado">Divorciado(a)</option>
+                                            <option value="Viuvo">Viúvo(a)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="delMae" class="form-label label1 labelCorEscuro">Mãe</label>
+                                        <input type="text" class="form-control input" id="delMae" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="delPai" class="form-label label1 labelCorEscuro">Pai</label>
+                                        <input type="text" class="form-control input" id="delPai" disabled>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                                    <div class=" d-flex justify-content-end">
+                                        <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn botaoCriar">Deletar</button>
+                                    </div>
+                                
+                            </div>
+                        </form>    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Fim do Modal Formulário Deletar Paciente-->
+        
+        
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#animacaoCadastroPaciente">
+            Mostrar Modal Animação
+        </button> 
+        
+        <!-- Modal Animação Cadastrar Paciente -->
+        <div class="modal fade" id="animacaoCadastroPaciente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> -->
+                <div class="modal-body d-flex flex-column align-items-center cardAnimacao">
+                    <img src="imagens/animacaoVerificado.gif" style="height: 214px; width: 214px;" alt="Gif Animado Confirmação">
+                    <div class="mensagemAnimacao">Paciente cadastrado com sucesso!</div>
+                    <button type="button" class="btn botaoAnimacao" data-bs-dismiss="modal">oK</button>
+                </div>
+                <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+            </div>
+        </div>
+        <!-- Fim Modal de Animação Cadastrar Paciente-->
+
+        <!-- Início Modal Dados Paciente-->
+        <div class="modal fade" id="modalDadosPaciente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content paddingForm">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <div class="container d-flex justify-content-between align-items-center">
+                            
+                            <div class="d-flex">
+                                <h2 class="modal_titulo ">Dados do paciente</h2>
+                                <!-- <a href="#"><img src="imagens/logoEditar.png" class="ms-2" data-bs-toggle="modal" data-bs-target="#modalEditarDadosPaciente"></a> -->
+                                <a href="#" class="linkEditarPaciente"><img src="imagens/logoEditar.png" class="ms-2" onclick="mostrarModalEditarPaciente(idPaciente)"></a>
+                            </div>
+                            <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body semPadding">
+                        
+                        <form id="formDadosPaciente">
+                            <div class="container">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="dadoCDF" class="form-label label1 labelCorEscuro">CPF</label>
+                                        <input type="text" class="form-control input" id="dadoCPF" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="dadoNomePaciente" class="form-label label1 labelCorEscuro">Nome</label>
+                                        <input type="text" class="form-control input" id="dadoNomePaciente" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="dadoDataNascimento" class="form-label label1 labelCorEscuro">Data de nascimento</label>
+                                        <input type="date" class="form-control input" id="dadoDataNascimento" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="dadoEmail" class="form-label label1 labelCorEscuro">E-mail</label>
+                                        <input type="email" class="form-control input" id="dadoEmail" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="dadoGenero" class="form-label label1 labelCorEscuro">Sexo/Gênero</label>
+                                        <select class="form-select  input" id="dadoGenero" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Feminino">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="dadoNacionalidade" class="form-label label1 labelCorEscuro">Nacionalidade</label>
+                                        <input type="text" class="form-control input" id="dadoNacionalidade" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <label for="dadoNaturalidade" class="form-label label1 labelCorEscuro">Naturalidade</label>
+                                        <input type="text" class="form-control input" id="dadoNaturalidade" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="dadoProfissao" class="form-label label1 labelCorEscuro">Profissão</label>
+                                        <input type="text" class="form-control input" id="dadoProfissao" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="dadoEscolaridade" class="form-label label1 labelCorEscuro">Escolaridade</label>
+                                        <select class="form-select input" id="dadoEscolaridade" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                            <optioon value="Ensino Fundamental Completo">Ensino Fundamental Completo</optioon>
+                                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                            <option value="Ension Superior Completo">Ensino Superior Completo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <label for="dadoEstadoCivil" class="form-label label1 labelCorEscuro">Estado Civil</label>
+                                        <select class="form-select input" id="dadoEstadoCivil" disabled>
+                                            <option selected>Digite</option>
+                                            <option value="Solteiro">Solteiro(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Separado">Separado(a)</option>
+                                            <option value="Divorciado">Divorciado(a)</option>
+                                            <option value="Viuvo">Viúvo(a)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="dadoMae" class="form-label label1 labelCorEscuro">Mãe</label>
+                                        <input type="text" class="form-control input" id="dadoMae" disabled>
+                                    </div>
+                                    <div class="col">
+                                        <label for="dadoPai" class="form-label label1 labelCorEscuro">Pai</label>
+                                        <input type="text" class="form-control input" id="dadoPai" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Dados Paciente-->
+    </main>
+    <!--Bootstrap v5.3-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="JavaScript/pacientes.js"></script>
+</body>
+</html>

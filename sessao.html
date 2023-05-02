@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <title>Sessão Wexer</title>
+    <!--Bootstrap v5.3-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body onload="nomearUsuario_editaLink_mostraSessao()">
+    <!-- <div class="navegador"></div> -->
+    <header class="d-flex justify-content-between">
+        <div class="logoTopo d-flex justify-content-center align-items-center">
+            <img src="imagens/logoCabecalho.png" alt="Logo Cabeçalho">
+        </div>
+        <div class="bemVindo d-flex align-items-center">
+            Bem vindo(a), <span id="nomeUsuario" class="ps-2">Nome Usuário</span>
+        </div>
+    </header>
+    <main>
+        <div class="cabecalhoVoltar d-flex align-items-center">
+            <a id="voltarProntuario" href="prontuario.html" class="voltarParaTopo2"><img src="imagens/setaEsquerda.png"> Voltar</a>
+        </div>
+        
+        <div class="sessaoContainer mx-auto ">
+            <div class="tituloPaginaSessao">
+                Sessão
+            </div>
+
+            <div class="corpoSessao mb-5">
+                <div class="tituloCorpoSessao">Sessão 02</div>
+                <div class="dataCartao">22 de setembro de 2022 | 16:00h - 17:00h</div>
+                <div class="conteudoCartao mb-4">A paciente relatou que estava tendo dificuldades com sua família e amigos próximos, pois demostra ansiedade diante de fatos cotidianos, resultando em reações de raiva com as pessoas que estão próximas a ela. Além disso, relatou brigas recentes com seus pais e namorado e, após a briga, ficou mal diante da forma como reagiu com as pessoas. Relatou também que muitas das pessoas que são próximas a ela a julgam por seus comportamentos, o que a deixa desconfortável e ainda mais ansiosa. A paciente comentou que chora com muita frequência, fica com medo em extremo diante de situações muito desafiadoras e entra em pânico.</div>
+                <div class="tituloPagamento mb-3">Pagamento</div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6 col-sm-3 p-0">
+                            <div class="labelSessao ">valor</div>
+                            <div class="valorSessao">R$200,00</div>
+                        </div>
+                        <div class="col-6pesquisar col-sm-4 p-0">
+                            <div class="labelSessao">Forma de pagamento</div>
+                            <div class="valorSessao">PIX</div>
+                        </div>
+                        <div class="col-6 col-sm-3 p-0">
+                            <div class="labelSessao">Status</div>
+                            <div class="valorSessao">Pago</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="opcoes">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalEditarSessao"><img src="imagens/logoEditar.png" alt=""></a>
+                    <a href="#" ><img src="imagens/logoDeletar.png" ></a>
+                </div>
+            </div>
+        </div>
+        <!--Início Modal Editar Sessão-->
+        <div class="modal fade" id="modalEditarSessao" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--Modal centralizado e com barra de rolagem-->
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content formPadding">
+                    <div class="modal-header semBordaInferior semPadding mb-4">
+                        <h2 class="modal_titulo" >Editar Sessão</h2>
+                        
+                        <button type="button" class="semborda" data-bs-dismiss="modal" ><img src="imagens/logoFechar2.png"></button>
+                        
+                    </div>
+                    <div class="modal-body semPadding">
+                        <form id="formEditarSessao" >
+                            <div class="container-fluid">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">1</div> Dados Gerais
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col ">
+                                        <label for="editarDataSessao" class="form-label mb-0">Data*</label>
+                                        <input type="date" class="form-control input" id="editarDataSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="editarHoraInicioSessao" class="form-label mb-0">Hora de início*</label>
+                                        <input type="time" class="form-control input" id="editarHoraInicioSessao">
+                                    </div>
+                                    <div class="col ">
+                                        <label for="editarHoraFimSessao" class="form-label mb-0">Hora fim*</label>
+                                        <input type="time" class="form-control input" id="editarHoraFimSessao">
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">2</div>Sessão
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="editarTituloSessao" class="form-label mb-0">Título*</label>
+                                        <input type="text" class="form-control input" id="editarTituloSessao" placeholder="Digite">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="editarResumoSessao" class="form-label">Resumo da Sessão*</label>                                            
+                                        <textarea name="ditarResumoSessao" class="form-control textarea1" id="editarResumoSessao"  rows="10" placeholder="Texto." ></textarea>
+                                    </div>
+                                </div>
+                                <hr class="margemSupInf24px">
+                                <div class="row mb-3">
+                                    <div class="col-12 p-0">
+                                        <div class="tituloSessao d-flex align-items-center">
+                                            <div class="numeral d-flex justify-content-center align-items-center me-2">3</div>Pagamento
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editarValorSessao" class="form-label">Valor</label>
+                                        <input type="number" class="form-control input" id="editarValorSessao" placeholder="R$ 150,99" >
+                                    </div>
+                                    <div class="col-12 col-sm-4">
+                                        <label for="editarFormaPagamento" class="form-label">Forma de pagamento</label>
+                                        <select class="form-select input" id="editarFormaPagamento">
+                                            <option value="PIX">PIX</option>
+                                            <option value="Cartao_Debito">Cartão de Débito</option>
+                                            <option value="Cartao_Credito">Cartao de Crédito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Status</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editarEstadoPagamento" id="editarPago" value="pago">
+                                            <label class="form-check-label" for="editarPago">
+                                                Pago
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="editarEstadoPagamento" id="editarNao_pago" value="nao_pago">
+                                            <label class="form-check-label" for="editarNao_pago">
+                                                Não pago
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-1 d-flex justify-content-end align-items-center p-0">
+                                        <img src="imagens/pino.png" style="width:30px; height: 30px;" >
+                                    </div>
+                                    <div class="col-11 col-lg-7"><b>Dica: </b>Registrar os pagamentos das sessões irá te auxiliar na sua organização financeira.</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer semPadding">
+                        <div class="w-100 d-flex justify-content-between align-items-center mt-4 flex-wrap">
+                            <div class="observacao">*Campos Obrigatórios</div>
+                            <div class=" d-flex justify-content-end flex-wrap">
+                                <button type="button" class="btn botaoCancelar" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn botaoSalvarAlteracoes" id="btn_editarSessao">Salvar alterações</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--Fim do Modal Editar Sessão-->
+
+    </main>
+    <!--Bootstrap v5.3-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="JavaScript/sessao.js"></script>
+</body>
+</html>
