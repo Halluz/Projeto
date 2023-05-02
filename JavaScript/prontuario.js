@@ -526,7 +526,7 @@ filtroSelect.addEventListener('change', async (evento) => {
 
 const cadastrarSessao = async (sessao) => {
     try{    
-        await fetch(apiURL+"://localhost:3000/prontuario", {
+        await fetch(apiURL+"prontuario", {
             method: "POST",
                 headers:  {
                     'Accept': 'application/json, text/plain, */*',
