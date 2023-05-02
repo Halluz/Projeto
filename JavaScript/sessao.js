@@ -1,3 +1,5 @@
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+
 //pega toda string da url
 const barraEnderecoUrl = window.location.search;
 
@@ -16,7 +18,7 @@ const identificadorSessao = Number.parseInt(urlParams.get('sessao'));
 
 const pegar_Usuario = async (dado) =>{
     try{ 
-        const varUsuario = await fetch(`http://localhost:3000/usuarios/${dado}`);
+        const varUsuario = await fetch(apiURL+`usuarios/${dado}`);
         const vetUsuario =  await varUsuario.json();
         return vetUsuario;
     }catch(erro){
@@ -26,7 +28,7 @@ const pegar_Usuario = async (dado) =>{
 
 const obterSessao = async (idSessao) => {
     try{    
-        const ObjetoSessao = await fetch(`http://localhost:3000/prontuario/${idSessao}`);
+        const ObjetoSessao = await fetch(apiURL+`prontuario/${idSessao}`);
         const ObjetoSessaoJSON = await ObjetoSessao.json();
         return ObjetoSessaoJSON;
     }catch(erro){
@@ -36,7 +38,7 @@ const obterSessao = async (idSessao) => {
 
 const editarSessao = async (idSessao, sessaoEditada) => {
     try{
-        await fetch(`http://localhost:3000/prontuario/${idSessao}`, {
+        await fetch(apiURL+`prontuario/${idSessao}`, {
                 method: "PUT",
                 headers:  {
                     'Accept': 'application/json, text/plain, */*',
@@ -165,7 +167,7 @@ const deletarSessaoOuFatoRelevante = async (idObjeto) => {
     const resposta = window.confirm("Tu tens certeza de que desejas fazer esta deleção?")
     if(resposta === true){
         try{    
-            fetch(`http://localhost:3000/prontuario/${idObjeto}`, {
+            fetch(apiURL+`prontuario/${idObjeto}`, {
                 method: "DELETE"
             });
             window.location.href = `prontuario.html?usuario=${identificadorUsuario}&paciente=${identificadorPaciente}`;

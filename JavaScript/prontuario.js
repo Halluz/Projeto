@@ -1,3 +1,5 @@
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+
 //pega toda string da url
 const barraEnderecoUrl = window.location.search;
 
@@ -14,7 +16,7 @@ const identificadorPaciente = Number.parseInt(urlParams.get('paciente'))
 
 const pegar_Usuario = async (dado) =>{
     try{ 
-        const varUsuario = await fetch(`http://localhost:3000/usuarios/${dado}`)
+        const varUsuario = await fetch(apiURL+`usuarios/${dado}`)
         const vetUsuario =  await varUsuario.json()
         return vetUsuario
     }catch(erro){
@@ -24,7 +26,7 @@ const pegar_Usuario = async (dado) =>{
 
 const obterPacienteEspecifico = async (idPaciente) => {
     try{
-        const paciente = await fetch(`http://localhost:3000/pacientes/${idPaciente}`)
+        const paciente = await fetch(apiURL+`pacientes/${idPaciente}`)
         const pacienteJSON = await paciente.json()
         return pacienteJSON
     }catch(erro){
@@ -36,7 +38,7 @@ const deletarSessaoOuFatoRelevante = async (idObjeto) => {
     const resposta = window.confirm("Tu tens certeza de que desejas fazer esta deleção?")
     if(resposta === true){
         try{    
-            fetch(`http://localhost:3000/prontuario/${idObjeto}`, {
+            fetch(apiURL+`prontuario/${idObjeto}`, {
                 method: "DELETE"
             });
             await imprimirProntuario(identificadorPaciente);
@@ -142,8 +144,8 @@ document.getElementById('formPesquisarNoProntuario').addEventListener('submit', 
     console.log("Pegou a palavra chava: ", palavraChave)
     if(palavraChave != ""){
         //A ordem de apresentaçao do Prontuario será a inversa de registro
-        const pesquisaInicio = await fetch(`http://localhost:3000/prontuario?idPaciente=${identificadorPaciente}&q=${palavraChave}&_sort=id&_order=desc`); //O parâmetro "q" pesquisa a palavraChave em todos os atributos do Objeto
-        // const pesquisaInicio = await fetch(`http://localhost:3000/prontuario?idPaciente=${identificadorPaciente}&titulo_like=${palavraChave}|texto_like=${palavraChave}&_sort=id&_order=desc`);// Não está funcionando
+        const pesquisaInicio = await fetch(apiURL+`prontuario?idPaciente=${identificadorPaciente}&q=${palavraChave}&_sort=id&_order=desc`); //O parâmetro "q" pesquisa a palavraChave em todos os atributos do Objeto
+        // const pesquisaInicio = await fetch(apiURL+`prontuario?idPaciente=${identificadorPaciente}&titulo_like=${palavraChave}|texto_like=${palavraChave}&_sort=id&_order=desc`);// Não está funcionando
         const pesquisa = await pesquisaInicio.json();
         console.log("Pesquisa na API: ", pesquisa)
 
@@ -216,7 +218,7 @@ document.getElementById('formPesquisarNoProntuario').addEventListener('submit', 
 //A requisição retorna um lista de objetos na ordem inversa em que foram registrados. Pilha
 const obterProntuario = async (idPaciente) => {
     try{
-        const listaSessoesFatosRelevantes = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&_sort=id&_order=desc`);
+        const listaSessoesFatosRelevantes = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&_sort=id&_order=desc`);
         const prontuario = await listaSessoesFatosRelevantes.json();
         return prontuario;
     }catch(erro){
@@ -226,7 +228,7 @@ const obterProntuario = async (idPaciente) => {
 
 const obterApenasSessoes_ordemInversaDeRegistro = async (idPaciente)=> {
     try{    
-        const apenasSessoesOrdemInversaRegistro = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=id&_order=desc`);
+        const apenasSessoesOrdemInversaRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=id&_order=desc`);
         const apenasSessoes_ordemInversaRegistroJSON = await apenasSessoesOrdemInversaRegistro.json();
         return apenasSessoes_ordemInversaRegistroJSON;
     }catch(erro){
@@ -236,7 +238,7 @@ const obterApenasSessoes_ordemInversaDeRegistro = async (idPaciente)=> {
 
 const obterApenasFatosRelevantes_ordemInversaDeRegistro = async (idPaciente) => {
     try{
-        const apenasFROrdemInversaRegistro = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id&_order=desc`);
+        const apenasFROrdemInversaRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id&_order=desc`);
         const apenasFR_ordemInversaRegistro = await apenasFROrdemInversaRegistro.json();
         return apenasFR_ordemInversaRegistro;
     }catch(erro){
@@ -247,7 +249,7 @@ const obterApenasFatosRelevantes_ordemInversaDeRegistro = async (idPaciente) => 
 //A requisição retorna uma lista de objetos na ordem crescente de id
 const obterProntuario_ordemDeRegistro = async (idPaciente) => {
     try{
-        const listaSessoesFatosRelevantesOR = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}`);
+        const listaSessoesFatosRelevantesOR = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}`);
         const prontuarioOR = await listaSessoesFatosRelevantesOR.json();
         return prontuarioOR;
     }catch(erro){
@@ -257,7 +259,7 @@ const obterProntuario_ordemDeRegistro = async (idPaciente) => {
 
 const obterApenasSessoes_ordemDeRegistro = async (idPaciente) => {
     try{
-        const apenasSessoesOrdemDeRegistro = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=id`);
+        const apenasSessoesOrdemDeRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=id`);
         const apenasSessoes_ordemDeRegistoJSON = await apenasSessoesOrdemDeRegistro.json();
         return apenasSessoes_ordemDeRegistoJSON;
     }catch(erro){
@@ -267,7 +269,7 @@ const obterApenasSessoes_ordemDeRegistro = async (idPaciente) => {
 
 const obterApenasFatosRelevantes_ordemDeRegistro = async (idPaciente) => {
     try{
-        const ApenasFatosRelevantaesOrdemDeRegistro = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id`)
+        const ApenasFatosRelevantaesOrdemDeRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id`)
     }catch(erro){
         console.log("Ocorreu um erro: ", erro)
     }
@@ -275,7 +277,7 @@ const obterApenasFatosRelevantes_ordemDeRegistro = async (idPaciente) => {
 
 const obterProntuario_ordemCrescenteDeData = async (idPaciente) => {
     try{
-        const prontuarioOrdemCrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&_sort=data`);
+        const prontuarioOrdemCrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&_sort=data`);
         const prontuario_ordemCrescenteDataJSON = await prontuarioOrdemCrescenteData.json();
         return prontuario_ordemCrescenteDataJSON;
     }catch(erro){
@@ -285,7 +287,7 @@ const obterProntuario_ordemCrescenteDeData = async (idPaciente) => {
 
 const obterApenasSessoes_ordemCrescenteDeData = async (idPaciente) => {
     try{
-        const apenasSessoesOrdemCrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=data`);
+        const apenasSessoesOrdemCrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=data`);
         const apenasSessoes_ordemCrescenteDataJSON = await apenasSessoesOrdemCrescenteData.json();
         return apenasSessoes_ordemCrescenteDataJSON;
     }catch(erro){
@@ -295,7 +297,7 @@ const obterApenasSessoes_ordemCrescenteDeData = async (idPaciente) => {
 
 const obterApenasFatosRelevantes_ordemCrescenteDeData = async (idPaciente) =>{
     try{
-        const apenasFROrdemCrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=data`);
+        const apenasFROrdemCrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=data`);
         const apenasFatosRelevantes_ordemCrescenteDataJSON = await apenasFROrdemCrescenteData.json();
         return apenasFatosRelevantes_ordemCrescenteDataJSON;
     }catch(erro){
@@ -305,7 +307,7 @@ const obterApenasFatosRelevantes_ordemCrescenteDeData = async (idPaciente) =>{
 
 const obterProntuario_ordemDecrescenteDeData = async (idPaciente) => {
     try{    
-        const prontuarioOrdemDecrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&_sort=data&_order=desc`);
+        const prontuarioOrdemDecrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&_sort=data&_order=desc`);
         const prontuario_ordemDecrescenteDataJSON = await prontuarioOrdemDecrescenteData.json();
         return prontuario_ordemDecrescenteDataJSON;
     }catch(erro){
@@ -315,7 +317,7 @@ const obterProntuario_ordemDecrescenteDeData = async (idPaciente) => {
 
 const obterApenasSessoes_ordemDecrescenteDeData = async (idPaciente) => {
     try{
-        const apenasSessoesOrdemDecrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=data&_order=desc`);
+        const apenasSessoesOrdemDecrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=sessao&_sort=data&_order=desc`);
         const apenasSessoes_ordemDecrescenteDataJSON = await apenasSessoesOrdemDecrescenteData.json();
         return apenasSessoes_ordemDecrescenteDataJSON;
     }catch(erro){
@@ -325,7 +327,7 @@ const obterApenasSessoes_ordemDecrescenteDeData = async (idPaciente) => {
 
 const obterApenasFatosRelevantes_ordemDecrescenteDeData = async (idPaciente) => {
     try{
-        const apenasFROrdemDecrescenteData = await fetch(`http://localhost:3000/prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=data&_order=desc`);
+        const apenasFROrdemDecrescenteData = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=data&_order=desc`);
         const apenasFR_ordemDecrescenteJSON = await apenasFROrdemDecrescenteData.json();
         return apenasFR_ordemDecrescenteJSON;
     }catch(erro){
@@ -524,7 +526,7 @@ filtroSelect.addEventListener('change', async (evento) => {
 
 const cadastrarSessao = async (sessao) => {
     try{    
-        await fetch("http://localhost:3000/prontuario", {
+        await fetch(apiURL+"://localhost:3000/prontuario", {
             method: "POST",
                 headers:  {
                     'Accept': 'application/json, text/plain, */*',
@@ -539,7 +541,7 @@ const cadastrarSessao = async (sessao) => {
 
 const obterSessao = async (idSessao) => {
     try{    
-        const ObjetoSessao = await fetch(`http://localhost:3000/prontuario/${idSessao}`);
+        const ObjetoSessao = await fetch(apiURL+`prontuario/${idSessao}`);
         const ObjetoSessaoJSON = await ObjetoSessao.json();
         return ObjetoSessaoJSON;
     }catch(erro){
@@ -549,7 +551,7 @@ const obterSessao = async (idSessao) => {
 
 const editarSessao = async (idSessao, sessaoEditada) => {
     try{
-        await fetch(`http://localhost:3000/prontuario/${idSessao}`, {
+        await fetch(apiURL+`prontuario/${idSessao}`, {
                 method: "PUT",
                 headers:  {
                     'Accept': 'application/json, text/plain, */*',
@@ -564,7 +566,7 @@ const editarSessao = async (idSessao, sessaoEditada) => {
 
 const cadastrarFatoRelevante = async (ObjetoFR) => {
     try{    
-        await fetch(`http://localhost:3000/prontuario`, {
+        await fetch(apiURL+`prontuario`, {
             method: "POST",
             headers:  {
                 'Accept': 'application/json, text/plain, */*',
@@ -579,7 +581,7 @@ const cadastrarFatoRelevante = async (ObjetoFR) => {
 
 const obterFatoRelevante = async (idFR) => {
     try{    
-        const ObjetoFR = await fetch(`http://localhost:3000/prontuario/${idFR}`);
+        const ObjetoFR = await fetch(apiURL+`prontuario/${idFR}`);
         const ObjetoFRJSON = await ObjetoFR.json();
         return ObjetoFRJSON;
     }catch(erro){
@@ -589,7 +591,7 @@ const obterFatoRelevante = async (idFR) => {
 
 const editarFatoRelevante = async (idFR, FReditado) => {
     try{    
-        await fetch(`http://localhost:3000/prontuario/${idFR}`, {
+        await fetch(apiURL+`prontuario/${idFR}`, {
             method: "PUT",
             headers:  {
                 'Accept': 'application/json, text/plain, */*',

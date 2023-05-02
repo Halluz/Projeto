@@ -1,6 +1,8 @@
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+
 const obterUsuarios = async () =>{
     try{
-        const obterUsuarios = await fetch("http://localhost:3000/usuarios")
+        const obterUsuarios = await fetch(apiURL+"usuarios")
         const listaUsuarios = await obterUsuarios.json()
         return listaUsuarios
 
@@ -11,7 +13,7 @@ const obterUsuarios = async () =>{
 
 const obterUsuario = async (dado) =>{
     try{ 
-        const varUsuario = await fetch(`http://localhost:3000/usuarios?email=${dado}`)
+        const varUsuario = await fetch(apiURL+`usuarios?email=${dado}`)
         const vetUsuario =  await varUsuario.json()
         return vetUsuario
     }catch(erro){

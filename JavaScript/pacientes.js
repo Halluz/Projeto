@@ -1,3 +1,5 @@
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+
 //pega toda string da url
 const barraEnderecoUrl = window.location.search;
 
@@ -9,7 +11,7 @@ const identificadorUsuario = Number.parseInt(urlParams.get('usuario'));
 
 const cadastrarPaciente = async (paciente) =>{
     try{
-        await fetch('http://localhost:3000/pacientes', {
+        await fetch(apiURL + "pacientes", {
             method: "POST",
             headers:  {
                 'Accept': 'application/json, text/plain, */*',
@@ -25,7 +27,7 @@ const cadastrarPaciente = async (paciente) =>{
 
 const obterPacienteEspecifico = async (idPaciente) => {
     try{
-        const paciente = await fetch(`http://localhost:3000/pacientes/${idPaciente}`)
+        const paciente = await fetch(apiURL+`pacientes/${idPaciente}`)
         const pacienteJSON = await paciente.json()
         return pacienteJSON
     }catch(erro){
@@ -35,7 +37,7 @@ const obterPacienteEspecifico = async (idPaciente) => {
 
 const obterTodosPacientes = async () => {
     try{
-        const listaPacientes = await fetch('ttp://localhost:3000/pacientes');
+        const listaPacientes = await fetch(apiURL + 'pacientes');
         const listaPacientesJSON = listaPacientes.json()
         return listaPacientesJSON
     }catch(erro){
@@ -46,7 +48,7 @@ const obterTodosPacientes = async () => {
 
 const editarPaciente = async (idPaciente, pacienteEditado) => {
     try{    
-        await fetch(`http://localhost:3000/pacientes/${idPaciente}`, {
+        await fetch(apiURL+`pacientes/${idPaciente}`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -61,7 +63,7 @@ const editarPaciente = async (idPaciente, pacienteEditado) => {
 
 const deletarPaciente = async (idPaciente) => {
     try{
-        await fetch(`http://localhost:3000/pacientes/${idPaciente}`, {
+        await fetch(apiURL+`pacientes/${idPaciente}`, {
             method: "DELETE"
         })
     }catch(erro){
@@ -71,7 +73,7 @@ const deletarPaciente = async (idPaciente) => {
 
 const listarPacientesDoUsuarioOrdemDeRegistro = async (idUsuario) => {
     try{    
-        let vetorTdsPacientesDoUsuario = await fetch(`http://localhost:3000/pacientes?idDoProfissionalUsuario=${idUsuario}`);
+        let vetorTdsPacientesDoUsuario = await fetch(apiURL+`pacientes?idDoProfissionalUsuario=${idUsuario}`);
 
         const pacientesUsuarioJSON = await vetorTdsPacientesDoUsuario.json();
 
@@ -85,7 +87,7 @@ const listarPacientesDoUsuarioOrdemDeRegistro = async (idUsuario) => {
 //Ordem inversa em que está registrado no Banco de Dados. Pilha
 const listarPacientesDoUsuario = async (idUsuario) => {
     try{    
-        let vetorTdsPacientesDoUsuario = await fetch(`http://localhost:3000/pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=id&_order=desc`);
+        let vetorTdsPacientesDoUsuario = await fetch(apiURL+ `pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=id&_order=desc`);
 
         const pacientesUsuarioJSON = await vetorTdsPacientesDoUsuario.json();
 
@@ -97,7 +99,7 @@ const listarPacientesDoUsuario = async (idUsuario) => {
 
 const pegar_Usuario = async (dado) =>{
     try{ 
-        const varUsuario = await fetch(`http://localhost:3000/usuarios/${dado}`)
+        const varUsuario = await fetch(apiURL+`usuarios/${dado}`)
         const vetUsuario =  await varUsuario.json()
         return vetUsuario
     }catch(erro){
@@ -155,7 +157,7 @@ async function nomearUsuario_E_listarPacientes(){
 
 const ordemAlfabeticaPacientes = async (idUsuario) => {
     try{
-        const ordemAlfabetica = await fetch(`http://localhost:3000/pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=nome`);
+        const ordemAlfabetica = await fetch(apiURL+`pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=nome`);
         const ordemAlfabeticaJSON = await ordemAlfabetica.json();
         
         //imprimir a lista em ordem alfabética na Página HTML
@@ -171,7 +173,7 @@ const ordemAlfabeticaPacientes = async (idUsuario) => {
 
 const ordemAlfabeticaInversaPacientes = async (idUsuario) => {
     try{
-        const ordemInversa = await fetch(`http://localhost:3000/pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=nome&_order=desc`);
+        const ordemInversa = await fetch(apiURL+`pacientes?idDoProfissionalUsuario=${idUsuario}&_sort=nome&_order=desc`);
         const ordemInversaJSON = await ordemInversa.json();
 
         //imprimir lista de pacientes na tabela
@@ -192,7 +194,7 @@ document.getElementById("formPesquisar").addEventListener('submit', async (event
     
     //verificar se o campo de pesquisa tem valor diferente de vazio
     if(palavraChave !== ""){
-        const pesquisa = await fetch(`http://localhost:3000/pacientes?idDoProfissionalUsuario=${identificadorUsuario}&nome_like=${palavraChave}`);
+        const pesquisa = await fetch(apiURL+ `pacientes?idDoProfissionalUsuario=${identificadorUsuario}&nome_like=${palavraChave}`);
         const pesquisaJSON = await pesquisa.json();
 
         //Imprimir os objetos da pesquisa na tabela
