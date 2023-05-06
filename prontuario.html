@@ -133,7 +133,7 @@
                                     <div class="traco"></div> 
                                     
                                     <div id="selectFiltro">
-                                        <select id="filtroSelect" class="form-select form-select-sm" style="width: 365px;">
+                                        <select onchange="ativarFiltro(event)" id="filtroSelect" class="form-select form-select-sm" style="width: 365px;">
                                             <option selected>Filtrar por:</option>
                                             <optgroup label="Ordem Inversa de Registro:">
                                                 <option onclick="imprimirFiltrosProntuario(idPaciente, 'todos_ordemInversaDeRegistro')" value="todos_ordemInversaDeRegistro">Todos (Ordem Inversa de Registro)</option>

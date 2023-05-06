@@ -1,5 +1,9 @@
 const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
 
+const modalEditar = new bootstrap.Modal(document.getElementById('modalEditarDadosPaciente'),{});
+const modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastroPaciente'),{});
+const modalAnimacao = new bootstrap.Modal(document.getElementById('animacaoCadastroPaciente'), {});
+
 //pega toda string da url
 const barraEnderecoUrl = window.location.search;
 
@@ -123,7 +127,7 @@ async function nomearUsuario(idUsuario){
 
 function imprimirPaciente(ObjetoPaciente){
     let tbody = document.getElementById('tbody');
-
+    console.log(ObjetoPaciente, " Na funçao imprimirPaciente")
     tbody.innerHTML = tbody.innerHTML + 
         `<tr>
             <td class="text-center">${ObjetoPaciente.id}</td>
@@ -243,9 +247,10 @@ document.getElementById('formCadastroPaciente').addEventListener('submit', async
     await cadastrarPaciente(paciente);
     //Apresenta os pacientes com a inclusão do novo paciente na página pacientes.html
     await nomearUsuario_E_listarPacientes();
-    console.log("1 linha antes da função mostrarAnimacao()")
+    
     //Fechar modal de formulário de Cadastro de Paciente
-    document.getElementById('modalCadastroPaciente').parentNode.classList.remove('show');
+    // document.getElementById('modalCadastroPaciente').parentNode.classList.remove('show');
+    modalCadastrar.hide()
     mostrarAnimacao();
 
 })
@@ -253,8 +258,11 @@ document.getElementById('formCadastroPaciente').addEventListener('submit', async
 function mostrarAnimacao(){
     console.log("Entrou na função mostrarAnimação()")
     //Abrir modal da animação
-    let modalAnimacao = new bootstrap.Modal(document.getElementById('animacaoCadastroPaciente'), {});
+    // let modalAnimacao = new bootstrap.Modal(document.getElementById('animacaoCadastroPaciente'), {});
     modalAnimacao.show();
+
+    //fechar modal de animação depois de 4 segundos
+    setTimeout(()=>{ modalAnimacao.hide()},4000)
     
 }
 
@@ -292,8 +300,7 @@ async function mostrarModalEditarPaciente(idPaciente){
     editarPai.value = paciente.pai;
 
     //Apresenta o Modal de Edição de pacientes  
-    let ModalEditarPaciente = new bootstrap.Modal(document.getElementById('modalEditarDadosPaciente'), {});
-    ModalEditarPaciente.show();
+    modalEditar.show();
 
     //formulário Editar Paciente
     document.getElementById('formEditarDadosPaciente').addEventListener('submit', async (evento) => {
@@ -314,11 +321,19 @@ async function mostrarModalEditarPaciente(idPaciente){
             "pai": editarPai.value,
             "idDoProfissionalUsuario": paciente.idDoProfissionalUsuario
         }
+        console.log("Passou por aqui: ")
         //Faz a edição do paciente na API
         await editarPaciente(idPaciente,pacienteEditado);
 
+        //Fecha o modal
+        modalEditar.hide();
+        
         //Apresenta lista de pacientes com a nova edição na página pacientes.html
-        await nomearUsuario_E_listarPacientes();
+        //await nomearUsuario_E_listarPacientes();
+
+        //Atualiza a página para limpar os registros antigos no formulário e o métodos de escuta e chamar a função nomearUsuario_E_listarPacientes() que está no evento de onload da tag body
+        window.location.reload()
+        
     })
 }
 
@@ -354,7 +369,7 @@ async function mostrarModalDeletarPaciente(idPaciente){
     delMae.value = delPaciente.mae;
     delPai.value = delPaciente.pai;
 
-    //Edita botão/link de Editar paciente nos modal Dados Paciente e Modal Deletar Paciente
+    //Edita botão/link de Editar paciente nos Modais Dados Paciente e Deletar Paciente
 
     const vetorLinks = document.querySelectorAll('.linkEditarPaciente')
 
@@ -380,6 +395,7 @@ async function mostrarModalDeletarPaciente(idPaciente){
             //Apresenta a página atualizada sem este paciente
             await nomearUsuario_E_listarPacientes();
         }
+        window.location.reload()
     })
 }
 
@@ -426,7 +442,7 @@ async function mostrarModalDadosPaciente(idPaciente){
 
     // document.getElementById('linkEditarPaciente').innerHTML = `<img src="imagens/logoEditar.png" class="ms-2" onclick="mostrarModalEditarPaciente(${idPaciente})" data-bs-dismiss="modal" aria-label="Close">`;
 
-    //Mostra Modal de Dados so Paciente
+    //Mostra Modal de Dados do Paciente
     let modalDadosPaciente = new bootstrap.Modal(document.getElementById('modalDadosPaciente'),{});
     modalDadosPaciente.show();
 

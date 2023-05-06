@@ -41,7 +41,8 @@ const deletarSessaoOuFatoRelevante = async (idObjeto) => {
             fetch(apiURL+`prontuario/${idObjeto}`, {
                 method: "DELETE"
             });
-            await imprimirProntuario(identificadorPaciente);
+            // await imprimirProntuario(identificadorPaciente);
+            window.location.reload()
         }catch(erro){
             console.log("Ocorreu um erro: ", erro)
         }
@@ -99,7 +100,7 @@ function linkVoltarPraListagem(){
 function editaTagSelectFiltro(){
     console.log("Entrou na função editaTagSelectFiltro()")
     document.getElementById("selectFiltro").innerHTML = 
-    `<select id="filtroSelect" class="form-select form-select-sm" style="width: 365px;">
+    `<select id="filtroSelect" onchange="ativarFiltro(event)" class="form-select form-select-sm" style="width: 365px;">
         <option selected>Filtrar por:</option>
         <optgroup label="Ordem Inversa de Registro:">
             <option  value="todos_ordemInversaDeRegistro">Todos (Ordem Inversa de Registro)</option>
@@ -142,7 +143,7 @@ document.getElementById('formPesquisarNoProntuario').addEventListener('submit', 
     //O método trim() remove os espaços antes da string
     const palavraChave = document.getElementById('campoPesquisar').value.trim();
     console.log("Pegou a palavra chava: ", palavraChave)
-    if(palavraChave != ""){
+    if(palavraChave !== ""){
         //A ordem de apresentaçao do Prontuario será a inversa de registro
         const pesquisaInicio = await fetch(apiURL+`prontuario?idPaciente=${identificadorPaciente}&q=${palavraChave}&_sort=id&_order=desc`); //O parâmetro "q" pesquisa a palavraChave em todos os atributos do Objeto
         // const pesquisaInicio = await fetch(apiURL+`prontuario?idPaciente=${identificadorPaciente}&titulo_like=${palavraChave}|texto_like=${palavraChave}&_sort=id&_order=desc`);// Não está funcionando
@@ -164,7 +165,10 @@ document.getElementById('formPesquisarNoProntuario').addEventListener('submit', 
                 conteudo.innerHTML = conteudo.innerHTML + 
                 `<div class="col-12 cartaoSessao">
                     <div class="circuloSessao"><img src="imagens/rostoCoracao.png"></div>
-                    <div class="tituloCartao">${pesquisa[i].titulo}</div>
+                    <div class="d-flex justify-content-between">    
+                        <div class="tituloCartao">${pesquisa[i].titulo}</div>
+                        <div style="font-weight:bold;">Id: <span style="color:darkred">${pesquisa[i].id}</span></div>
+                    </div>
                     <div class="dataCartao">${pesquisa[i].data}</div>
                     <div class="conteudoCartao">${pesquisa[i].texto}... <a href="sessao.html?usuario=${identificadorUsuario}&paciente=${identificadorPaciente}&sessao=${pesquisa[i].id}" class="linkAzul">Ver mais</a></div>
                 
@@ -191,7 +195,10 @@ document.getElementById('formPesquisarNoProntuario').addEventListener('submit', 
                 conteudo.innerHTML = conteudo.innerHTML + 
                 `<div class="col-12 cartaoFatoRelevante">
                     <div class="circuloFatoRelevante"><img src="imagens/logoFatoRelevanteCartao.png"></div>
-                    <div class="tituloCartao">${pesquisa[i].titulo}</div>
+                    <div class="d-flex justify-content-between">    
+                        <div class="tituloCartao">${pesquisa[i].titulo}</div>
+                        <div style="font-weight:bold;">Id: <span style="color:darkred">${pesquisa[i].id}</span></div>
+                    </div>
                     <div class="dataCartao">${pesquisa[i].data}</div>
                     <div class="conteudoCartao">${pesquisa[i].texto}</div>
                 
@@ -269,7 +276,9 @@ const obterApenasSessoes_ordemDeRegistro = async (idPaciente) => {
 
 const obterApenasFatosRelevantes_ordemDeRegistro = async (idPaciente) => {
     try{
-        const ApenasFatosRelevantaesOrdemDeRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id`)
+        const apenasFatosRelevantesOrdemDeRegistro = await fetch(apiURL+`prontuario?idPaciente=${idPaciente}&tipo=fatoRelevante&_sort=id`);
+        const apenasFR_ordemDeRegistroJSON = await apenasFatosRelevantesOrdemDeRegistro.json();
+        return apenasFR_ordemDeRegistroJSON;
     }catch(erro){
         console.log("Ocorreu um erro: ", erro)
     }
@@ -336,12 +345,11 @@ const obterApenasFatosRelevantes_ordemDecrescenteDeData = async (idPaciente) => 
 }
 
 //Evento da tag Select filtros de ordenação
-//Esse evento "change" do select permite que o uso do teclado, assistente de voz e tambem o click dispare a função
-const filtroSelect = document.getElementById('filtroSelect');
-filtroSelect.addEventListener('change', async (evento) => {
+//O atributo "onchange" do select na página html permite que o uso do teclado, assistente de voz e tambem o click dispare a função 'ativarFiltro'
+async function ativarFiltro(evento) {
     const filtro = evento.target.value;
-    const vetorProntuario = [];
-    console.log("Entrou no evento de escuta da tag Select");
+    let vetorProntuario = [];
+    console.log("Entrou na função ativarFiltro()");
     if(filtro === "todos_ordemInversaDeRegistro"){
         vetorProntuario = await obterProntuario(identificadorPaciente);
     }else if(filtro === "sessao_ordemInversaDeRegistro"){
@@ -384,7 +392,10 @@ filtroSelect.addEventListener('change', async (evento) => {
             conteudo.innerHTML = conteudo.innerHTML + 
             `<div class="col-12 cartaoSessao">
                 <div class="circuloSessao"><img src="imagens/rostoCoracao.png"></div>
-                <div class="tituloCartao">${vetorProntuario[i].titulo}</div>
+                <div class="d-flex justify-content-between">    
+                    <div class="tituloCartao">${vetorProntuario[i].titulo}</div>
+                    <div style="font-weight:bold;">Id: <span style="color:darkred">${vetorProntuario[i].id}</span></div>
+                </div>
                 <div class="dataCartao">${vetorProntuario[i].data}</div>
                 <div class="conteudoCartao">${vetorProntuario[i].texto}... <a href="sessao.html?usuario=${identificadorUsuario}&paciente=${identificadorPaciente}&sessao=${vetorProntuario[i].id}" class="linkAzul">Ver mais</a></div>
             
@@ -411,7 +422,10 @@ filtroSelect.addEventListener('change', async (evento) => {
             conteudo.innerHTML = conteudo.innerHTML + 
             `<div class="col-12 cartaoFatoRelevante">
                 <div class="circuloFatoRelevante"><img src="imagens/logoFatoRelevanteCartao.png"></div>
-                <div class="tituloCartao">${vetorProntuario[i].titulo}</div>
+                <div class="d-flex justify-content-between">    
+                    <div class="tituloCartao">${vetorProntuario[i].titulo}</div>
+                    <div style="font-weight:bold;">Id: <span style="color:darkred">${vetorProntuario[i].id}</span></div>
+                </div>
                 <div class="dataCartao">${vetorProntuario[i].data}</div>
                 <div class="conteudoCartao">${vetorProntuario[i].texto}</div>
             
@@ -429,7 +443,7 @@ filtroSelect.addEventListener('change', async (evento) => {
             </div>`
         }
     }
-})
+}
 
 /* async function imprimirFiltrosProntuario(idPaciente, filtro){
     const vetorProntuario = []
@@ -622,7 +636,10 @@ async function imprimirProntuario(idPaciente){
             conteudo.innerHTML = conteudo.innerHTML + 
             `<div class="col-12 cartaoSessao">
                 <div class="circuloSessao"><img src="imagens/rostoCoracao.png"></div>
-                <div class="tituloCartao">${VetorProntuario[i].titulo}</div>
+                <div class="d-flex justify-content-between">    
+                    <div class="tituloCartao">${VetorProntuario[i].titulo}</div>
+                    <div style="font-weight:bold;">Id: <span style="color:darkred">${VetorProntuario[i].id}</span></div>
+                </div>
                 <div class="dataCartao">${VetorProntuario[i].data}</div>
                 <div class="conteudoCartao">${VetorProntuario[i].texto}... <a href="sessao.html?usuario=${identificadorUsuario}&paciente=${identificadorPaciente}&sessao=${VetorProntuario[i].id}" class="linkAzul">Ver mais</a></div>
             
@@ -649,7 +666,10 @@ async function imprimirProntuario(idPaciente){
             conteudo.innerHTML = conteudo.innerHTML + 
             `<div class="col-12 cartaoFatoRelevante">
                 <div class="circuloFatoRelevante"><img src="imagens/logoFatoRelevanteCartao.png"></div>
-                <div class="tituloCartao">${VetorProntuario[i].titulo}</div>
+                <div class="d-flex justify-content-between">    
+                    <div class="tituloCartao">${VetorProntuario[i].titulo}</div>
+                    <div style="font-weight:bold;">Id: <span style="color:darkred">${VetorProntuario[i].id}</span></div>
+                </div>
                 <div class="dataCartao">${VetorProntuario[i].data}</div>
                 <div class="conteudoCartao">${VetorProntuario[i].texto}</div>
             
@@ -723,6 +743,8 @@ document.getElementById("btn_cadastrar_sessao").addEventListener('click', async 
     await cadastrarSessao(sessao);
 
     await imprimirProntuario(identificadorPaciente);
+    //Limpa formulário carregando a página
+    window.location.reload()
 })
 
 //Cadastro Fato Relevante
@@ -745,7 +767,10 @@ document.getElementById('formCadastrarFatoRelevante').addEventListener('submit',
 
     //adiciona o Objeto Fato Relevante na API
     await cadastrarFatoRelevante(FatoRelevante);
-    await imprimirProntuario(identificadorPaciente)
+    await imprimirProntuario(identificadorPaciente);
+
+    //Recarrega a página para limpar o formulário
+    window.location.reload()
 })
 
 async function mostrarModalEditarSessao(idSessao){
@@ -801,6 +826,8 @@ async function mostrarModalEditarSessao(idSessao){
 
         await editarSessao(idSessao, sessaoEditada);
         await imprimirProntuario(identificadorPaciente);
+        //Recarrega a página para
+        window.location.reload()
     })
 }
 
@@ -836,5 +863,6 @@ async function mostrarModalEditarFatoRelevante(idFR){
 
         await editarFatoRelevante(idFR, FatoRelevanteEditado);
         await imprimirProntuario(identificadorPaciente);
+        window.location.reload()
     })
 }
