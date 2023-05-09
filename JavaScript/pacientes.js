@@ -1,4 +1,5 @@
-const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+const apiUrl = "http://localhost:3000/"
 
 const modalEditar = new bootstrap.Modal(document.getElementById('modalEditarDadosPaciente'),{});
 const modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastroPaciente'),{});

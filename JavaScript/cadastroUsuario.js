@@ -1,4 +1,5 @@
-const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+const apiUrl = "http://localhost:3000/"
 
 //Esconde os campos da primeira parte do formulário de cadastro do usuário e apresenta os campos da segunda parte
 function parte2(){
@@ -45,25 +46,23 @@ document.getElementById('formCadastro').addEventListener('submit', async (evento
     const senha= document.getElementById("senhaCadastro").value;
     const confSenha = document.getElementById("confirmarSenhaCadastro").value;
 
-    if(senha != confSenha){
-        window.alert("As Senhas não coincidem! Não são as mesmas.")
-    }else{
+        
+    if(validarSenha(senha) === true && senha === confSenha){
         const usuario = {
             "nome": nome,
             "email": email,
             "senha": senha
         }
-    
-    // const resultado = await cadastrarUsuario(usuario)
-    // console.log(resultado)
-    await cadastrarUsuario(usuario)
+        await cadastrarUsuario(usuario)
+        window.location.href = "index.html"
 
-    //Se o cadastro for realizado com sucesso, uma mensagem informando isso será mostrada e em seguida a página de login será apresentada.
-    //carrega a página de login
-    window.location.href = "index.html"
+    }else if(validarSenha(senha) === false){
+        window.alert("A senha precisa conter pelo menos: 8 dígitos; uma letra minúscula, uma letra maiúscula e um caracter especial ($&@#*/+)")
+    }else if(senha !== confSenha){
+        window.alert("As Senhas não coincidem! Não são as mesmas.")
+    }else{
+        window.alert("Um erro inesperado aconteceu.")
     }
-
-    //Se o cadastro der errado a página é recarregada e a primeira parte do formulário é apresentada
 })
 
 let olhoSenha = document.querySelector('#olhoSenha');
@@ -89,3 +88,8 @@ olhoConfSenha.addEventListener('click', function (){
         input.setAttribute('type', 'password');
     }
 })
+
+function validarSenha(senha){
+    expressaoRegular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#/+])[0-9a-zA-Z$*&@#/+]{8,}$/
+    return expressaoRegular.test(senha)
+}

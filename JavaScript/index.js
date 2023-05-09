@@ -1,4 +1,5 @@
-const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+const apiUrl = "http://localhost:3000/"
 
 const obterUsuarios = async () =>{
     try{
@@ -43,7 +44,8 @@ document.getElementById('formLogin').addEventListener('submit', async (evento) =
     const vetUsuario = await obterUsuario(login)
     console.log(vetUsuario)
 
-    if(vetUsuario.length == 0){
+    
+    if(vetUsuario.length === 0){
         window.alert("Login e senha não cadastrados.")
     }else{
         vetUsuario.forEach(elemento => {
@@ -58,3 +60,8 @@ document.getElementById('formLogin').addEventListener('submit', async (evento) =
         }); 
     }
 })
+
+function validarSenha(senha){
+    expressaoRegular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#/+])[0-9a-zA-Z$*&@#/+]{8,}$/
+    return expressaoRegular.test(senha)
+}

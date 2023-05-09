@@ -1,4 +1,5 @@
-const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+const apiUrl = "http://localhost:3000/"
 
 //pega toda string da url
 const barraEnderecoUrl = window.location.search;
