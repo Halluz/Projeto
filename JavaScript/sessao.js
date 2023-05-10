@@ -1,5 +1,5 @@
-// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
-const apiUrl = "http://localhost:3000/"
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "http://localhost:3000/"
 
 
 //pega toda string da url
@@ -98,7 +98,7 @@ async function imprimirSessao(idSessao){
         </div>
         <div class="opcoes">
             <!--<a href="#" data-bs-toggle="modal" data-bs-target="#ModalEditarSessao"><img src="imagens/logoEditar.png" alt=""></a>-->
-            <a href="#" data-bs-toggle="modal" onclick="mostrarModalEditarSessao(${identificadorSessao})"><img src="imagens/logoEditar.png" alt=""></a>
+            <a href="#" onclick="mostrarModalEditarSessao(${identificadorSessao})"><img src="imagens/logoEditar.png"></a>
             <a href="#" onclick="deletarSessaoOuFatoRelevante(${identificadorSessao})" ><img src="imagens/logoDeletar.png" ></a>
         </div>`
 }
@@ -162,6 +162,7 @@ async function mostrarModalEditarSessao(idSessao){
 
         await editarSessao(idSessao, sessaoEditada);
         await imprimirSessao(identificadorSessao);
+        window.location.reload()
     })
 }
 
@@ -169,7 +170,7 @@ const deletarSessaoOuFatoRelevante = async (idObjeto) => {
     const resposta = window.confirm("Tu tens certeza de que desejas fazer esta deleção?")
     if(resposta === true){
         try{    
-            fetch(apiURL+`prontuario/${idObjeto}`, {
+            await fetch(apiURL+`prontuario/${idObjeto}`, {
                 method: "DELETE"
             });
             window.location.href = `prontuario.html?usuario=${identificadorUsuario}&paciente=${identificadorPaciente}`;

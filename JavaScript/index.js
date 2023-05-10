@@ -1,5 +1,5 @@
-// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
-const apiUrl = "http://localhost:3000/"
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "http://localhost:3000/"
 
 const obterUsuarios = async () =>{
     try{
@@ -61,7 +61,3 @@ document.getElementById('formLogin').addEventListener('submit', async (evento) =
     }
 })
 
-function validarSenha(senha){
-    expressaoRegular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#/+])[0-9a-zA-Z$*&@#/+]{8,}$/
-    return expressaoRegular.test(senha)
-}

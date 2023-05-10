@@ -1,5 +1,5 @@
-// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
-const apiUrl = "http://localhost:3000/"
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "http://localhost:3000/"
 
 const modalEditar = new bootstrap.Modal(document.getElementById('modalEditarDadosPaciente'),{});
 const modalCadastrar = new bootstrap.Modal(document.getElementById('modalCadastroPaciente'),{});
@@ -246,13 +246,15 @@ document.getElementById('formCadastroPaciente').addEventListener('submit', async
     }
 
     await cadastrarPaciente(paciente);
-    //Apresenta os pacientes com a inclusão do novo paciente na página pacientes.html
-    await nomearUsuario_E_listarPacientes();
     
     //Fechar modal de formulário de Cadastro de Paciente
     // document.getElementById('modalCadastroPaciente').parentNode.classList.remove('show');
     modalCadastrar.hide()
     mostrarAnimacao();
+
+    //Apresenta os pacientes com a inclusão do novo paciente na página pacientes.html
+    // await nomearUsuario_E_listarPacientes();
+    window.location.reload()
 
 })
 

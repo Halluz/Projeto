@@ -1,5 +1,5 @@
-// const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
-const apiUrl = "http://localhost:3000/"
+const apiURL = "https://projeto-final-modulo01-arnia.onrender.com/"
+// const apiURL = "http://localhost:3000/"
 
 //Esconde os campos da primeira parte do formulário de cadastro do usuário e apresenta os campos da segunda parte
 function parte2(){
@@ -10,6 +10,8 @@ function parte2(){
     if(nome.value.trim() === '' || email.value.trim() === ''){
         //a função trim() serve para retirar os espaços em branco antes e depois da string.
         window.alert("Preencha os campos!")
+    }else if(validarEmail(email.value) === false){
+        window.alert("Insira um endereço de email válido que siga as especificações do RFC 5322. Email: 'nome-do-usuario' + @ + 'domínio-do-email' + '.' + 'extensão-do-domínio'")
     }else{
         document.querySelector(".parte1").style.display = "none"
 
@@ -21,6 +23,15 @@ function parte2(){
     }
 }
 
+//Esconde os campos da segunda parte do formulário e apresenta os campos da primeira parte
+function parte1(){
+    const vetor = document.querySelectorAll(".parte2")
+    for(let i=0; i < vetor.length; i++){
+        vetor[i].style.display = "none"
+    }
+
+    document.querySelector(".parte1").style.display = "block"
+}
 
 const cadastrarUsuario = async (usuario) => {
     try{    
@@ -92,4 +103,9 @@ olhoConfSenha.addEventListener('click', function (){
 function validarSenha(senha){
     expressaoRegular = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#/+])[0-9a-zA-Z$*&@#/+]{8,}$/
     return expressaoRegular.test(senha)
+}
+
+function validarEmail(email){
+    expressaoRegular = /^(?!\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return expressaoRegular.test(email)
 }
