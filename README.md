@@ -5,4 +5,6 @@ Navegue na aplicação neste link do Vercel: https://prototipo-projeto-wexer.ver
 
 OBSERVAÇÃO: O banco de dados é um arquivo Json hospedado gratuitamente no Render que usa a API Json-server. Porém a versão gratuita do serviço de hospedagem do Render não permite que os dados persistem no banco de dados por muito tempo. Então, depois de um tempo os dados criados no banco serão todos apagados automaticamente.
 
+BUFFY A CAÇA VAMPIROS
+
 
